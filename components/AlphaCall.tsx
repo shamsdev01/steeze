@@ -11,7 +11,7 @@ const AlphaCall = () => {
           text-lg sm:text-xl md:text-2xl 
           font-bold 
           text-black 
-          border-3 
+          border-3
           border-[#288232] 
           bg-gradient-to-r from-[#001F3F] to-[#F5F5F5] 
           py-3 sm:py-4 md:py-5 
