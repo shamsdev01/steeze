@@ -9,7 +9,6 @@ interface ServiceItem {
   items: string[];
 }
 
-
 const ServiceCard = ({ title, subtitle, items }: ServiceItem) => (
   <motion.div 
     className="flex flex-col"
@@ -20,7 +19,7 @@ const ServiceCard = ({ title, subtitle, items }: ServiceItem) => (
     <h3 className="text-xl font-bold mb-1 text-white flex items-center justify-center">{title}</h3>
     <p className="text-sm mb-2 text-white flex items-center justify-center">{subtitle}</p>
     <motion.div 
-      className="bg-gradient-to-b from-[#001F3F] to-[#034D99] rounded-xl p-4 text-white h-full"
+      className="bg-gradient-to-b from-[#001F3F] to-blue-600 rounded-xl p-4 text-white h-full"
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 300 }}
     >
@@ -75,7 +74,6 @@ const Services = () => {
   ];
 
   return (
- 
     <motion.div 
       className="bg-gradient-to-b from-[#034D99] via-[#034D99] to-[#F5F5F5] rounded-[50px] p-8"
       initial={{ opacity: 0 }}
@@ -104,24 +102,24 @@ const Services = () => {
         ))}
       </div>
       <motion.div 
-        className="flex justify-around space-x-4"
+        className="flex flex-col sm:flex-row justify-around space-y-4 sm:space-y-0 sm:space-x-4"
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.5 }}
       >
-        <div className="">
+        <div className="w-full sm:w-auto">
           <motion.button 
-            className="border-[3px] border-[#288232] bg-gradient-to-r from-[#001F3F] to-[#F5F5F5] flex w-[400px] py-[15px] px-0 justify-center items-center"
+            className="border-[3px] border-[#288232] bg-gradient-to-r from-[#001F3F] to-[#F5F5F5] flex w-full sm:w-[300px] lg:w-[400px] py-[15px] px-4 justify-center items-center"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             Free Mode
           </motion.button>
-          <span className="flex items-center text-black justify-center mt-2">Can only check<br></br>two projects per week</span>
+          <span className="flex items-center text-black justify-center mt-2 text-sm sm:text-base">Can only check<br></br>two projects per week</span>
         </div>
-        <div className="">
+        <div className="w-full sm:w-auto">
           <motion.button 
-            className="border-[3px] border-[#288232] bg-gradient-to-r from-[#001F3F] to-[#F5F5F5] flex w-[400px] py-[15px] px-0 justify-center items-center"
+            className="border-[3px] border-[#288232] bg-gradient-to-r from-[#001F3F] to-[#F5F5F5] flex w-full sm:w-[300px] lg:w-[400px] py-[15px] px-4 justify-center items-center"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             animate={bounceAnimation}
@@ -129,11 +127,10 @@ const Services = () => {
           >
             Buy Gas Fee
           </motion.button>
-          <span className="flex items-center text-black justify-center">Never run out of gas fee <br></br>  deposit ahead and buy at <br></br> current market rate </span>
+          <span className="flex items-center text-black justify-center text-sm sm:text-base">Never run out of gas fee <br></br>  deposit ahead and buy at <br></br> current market rate </span>
         </div>
       </motion.div>
     </motion.div>
-
   );
 };
 

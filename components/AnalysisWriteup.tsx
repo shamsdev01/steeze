@@ -26,75 +26,72 @@ const AnalysisWriteup = () => {
   return (
     <Container>
       <motion.div 
-        className="px-20"
+        className="px-4 sm:px-6 md:px-8 lg:px-20 max-w-7xl mx-auto"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
         <motion.h2 
-          className="flex items-center justify-center font-bold text-2xl"
+          className="text-center font-bold text-2xl md:text-3xl mb-4"
           variants={itemVariants}
         >
           Airdrop Guide
         </motion.h2>
         <motion.span 
-          className="flex items-center"
+          className="block text-center text-lg md:text-xl mb-6"
           variants={itemVariants}
         >
           Earn Free Blum Points: Key Steps
         </motion.span>
         <motion.div 
-          className="flex mr-10 items-center"
+          className="mb-8"
           variants={itemVariants}
         >
-          <ul className="list-decimal">
+          <ul className="list-decimal pl-6 space-y-2">
             {[
-              "Join the Blum Telegram group via :   https://t.me/blum/app?startapp=ref_jYmw9tYTvo",
+              "Join the Blum Telegram group via: https://t.me/blum/app?startapp=ref_jYmw9tYTvo",
               "Visit the mini-app every 8 hours to claim your accumulated Blum points",
               "Visit the mini-app daily to grow your streak and earn free Blum points with daily 7 drop game tickets",
-              "Use your tickets to play the drop game ( tips on playing the drop game :- catch only flowers and avoid bombs )",
+              "Use your tickets to play the drop game (tips: catch only flowers and avoid bombs)",
               "Complete community tasks like sharing content and inviting new members."
             ].map((item, index) => (
-              <motion.li key={index} variants={itemVariants}>{item}</motion.li>
+              <motion.li key={index} variants={itemVariants} className="text-sm md:text-base">{item}</motion.li>
             ))}
           </ul>
         </motion.div>
-        <motion.div className="gap-x-10" variants={itemVariants}>
-          <div className="">
-            <motion.span className="font-bold" variants={itemVariants}> Market Analysis</motion.span>
-            <motion.p variants={itemVariants}>Blum is here to Simplify Crypto Trading</motion.p>
-            <motion.span variants={itemVariants}>With Blum you can access a wide range of tokens from centralized and decentralized platforms in one place. Enjoy:</motion.span>
-            <motion.div variants={itemVariants}>
-              <ul>
-                {["Easy derivatives trading", "Futures trading", "Seamless coin purchases"].map((item, index) => (
-                  <motion.li key={index} variants={itemVariants}>- {item}</motion.li>
-                ))}
-              </ul>
-            </motion.div>
-            <motion.span className="font-bold text-1xl" variants={itemVariants}>Blum  decentralized exchange offers:</motion.span>
-            <ul>
-              {[
-                "Flexibility: Trade without limitations",
-                "Ease of use: Navigate with simplicity",
-                "Security: Control your funds with MPC wallet or connect your existing wallet"
-              ].map((item, index) => (
-                <motion.li className="text-1xl" key={index} variants={itemVariants}>- {item}</motion.li>
-              ))}
-            </ul>
-            <motion.span className="text-1xl" variants={itemVariants}>Trade anywhere, anytime with our mobile and Telegram mini apps.Team</motion.span>
-            <ul>
-              {[
-                "Gleb Kostarev ( CEO & Co-founder )",
-                "Vladimir Smerkis ( co - founder of Blum also an ex-head of binance CIS / Central Asia )"
-              ].map((item, index) => (
-                <motion.li key={index} variants={itemVariants}>- {item}</motion.li>
-              ))}
-            </ul>
-          </div>
+        <motion.div className="space-y-4" variants={itemVariants}>
+          <motion.span className="font-bold text-xl block mb-2" variants={itemVariants}>Market Analysis</motion.span>
+          <motion.p variants={itemVariants} className="mb-4">Blum is here to Simplify Crypto Trading</motion.p>
+          <motion.span variants={itemVariants} className="block mb-2">With Blum you can access a wide range of tokens from centralized and decentralized platforms in one place. Enjoy:</motion.span>
+          <motion.ul className="list-disc pl-6 mb-4 space-y-1">
+            {["Easy derivatives trading", "Futures trading", "Seamless coin purchases"].map((item, index) => (
+              <motion.li key={index} variants={itemVariants} className="text-sm md:text-base">{item}</motion.li>
+            ))}
+          </motion.ul>
+          <motion.span className="font-bold text-lg block mb-2" variants={itemVariants}>Blum decentralized exchange offers:</motion.span>
+          <motion.ul className="list-disc pl-6 mb-4 space-y-1">
+            {[
+              "Flexibility: Trade without limitations",
+              "Ease of use: Navigate with simplicity",
+              "Security: Control your funds with MPC wallet or connect your existing wallet"
+            ].map((item, index) => (
+              <motion.li key={index} variants={itemVariants} className="text-sm md:text-base">{item}</motion.li>
+            ))}
+          </motion.ul>
+          <motion.span className="block mb-2" variants={itemVariants}>Trade anywhere, anytime with our mobile and Telegram mini apps.</motion.span>
+          <motion.span className="font-bold text-lg block mb-2" variants={itemVariants}>Team</motion.span>
+          <motion.ul className="list-disc pl-6 space-y-1">
+            {[
+              "Gleb Kostarev (CEO & Co-founder)",
+              "Vladimir Smerkis (Co-founder of Blum, ex-head of Binance CIS / Central Asia)"
+            ].map((item, index) => (
+              <motion.li key={index} variants={itemVariants} className="text-sm md:text-base">{item}</motion.li>
+            ))}
+          </motion.ul>
         </motion.div>
       </motion.div>
       <motion.div 
-        className="grid max-w-screen-xl grid-cols-1 gap-10 pt-10 mx-auto mt-5 border-t-8 border-[#302d2d3b] h-4xl lg:grid-cols-5"
+        className="grid max-w-screen-xl grid-cols-1 gap-10 pt-10 mx-auto mt-8 border-t-2 border-gray-200"
         variants={itemVariants}
       ></motion.div>
     </Container>

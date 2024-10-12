@@ -35,7 +35,7 @@ const Satoshi = () => {
         alt="Crypto Steeze Logo"
         width={400}
         height={350}
-        className="rounded-lg shadow-lg"
+        className="rounded-lg shadow-lg animate-pulse max-w-full h-auto"
       />
     </div>
   </div>

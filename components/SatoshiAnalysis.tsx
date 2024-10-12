@@ -1,34 +1,92 @@
-
-import React from 'react'
-import Container from './Container'
+"use client";
+import React from 'react';
+import Container from './Container';
+import { motion } from 'framer-motion';
 
 const SatoshiAnalysis = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1
+    }
+  };
+
   return (
     <Container>
-    <div className=" items-center justify-center space-y-4">
-        <div className="p-20 space-y-2">
-        <h2 className="flex items-center justify-center font-bold text-2xl">Market Aalysis</h2>
-        <span className=" flex items-center justify-center">Satoshi App is a premier airdrop platform, serving over 16 million users worldwide and offering the opportunity to earn free </span> 
-        <span className='flex items-center justify-center'>tokens daily. Satoshi app mission is to enhance crypto enthusiat Web 3 experience by making it safer, smoother and more convenient.</span>
-        <p className="flex items-center justify-center">Satoshi app serve as a bridge, linking cutting edge blockchain projects with a worldwide audience, providing users with a simple way to discover 
-        and receive tokens.</p>
-        </div>
-        <h2 className="flex items-center justify-center text-2xl font-bold">Airdrop Guide</h2>
-       <div className="space-y-2">
-       <span className="font-bold">How to Get on-board</span>
-            <ul className="list-decimal">
-                <li>Register and download Satohi app <span className='text-blue-800 '>https://invite.satoshiapp.xyz/21g2c</span></li>
-                <li> Complete your verification and initiate your mining by participating on ongoing airdrops</li>
-                <li>Use gift card [ once ] to enjoy new user hash rate</li>
-                <li>Exchange hash cards with friends / other miners to increase your hash rate</li>
-                <li>Satoshi app uses rounds [ airdrop tokens are distributed to participants every hour ] 1 round = 1 hour</li>
-                <li>Mining will temporary stop after twenty five unclaimed rounds</li>
-            </ul>
-       </div>
-    </div>
-    <div className="grid max-w-screen-xl grid-cols-1 gap-10 pt-10 mx-auto mt-5 border-t-8 border-[#302d2d3b] h-4xl lg:grid-cols-5"></div>
-    </Container>
-  )
-}
+      <motion.div
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.h2 
+          className="text-center font-bold text-2xl md:text-3xl mb-6"
+          variants={itemVariants}
+        >
+          Market Analysis
+        </motion.h2>
+        <motion.div 
+          className="space-y-4 mb-8 text-center"
+          variants={itemVariants}
+        >
+          <p>
+            Satoshi App is a premier airdrop platform, serving over 16 million users worldwide and offering the opportunity to earn free tokens daily.
+          </p>
+          <p>
+            Satoshi app's mission is to enhance crypto enthusiasts' Web 3 experience by making it safer, smoother and more convenient.
+          </p>
+          <p>
+            Satoshi app serves as a bridge, linking cutting-edge blockchain projects with a worldwide audience, providing users with a simple way to discover and receive tokens.
+          </p>
+        </motion.div>
 
-export default SatoshiAnalysis
+        <motion.h2 
+          className="text-center font-bold text-2xl md:text-3xl mb-6"
+          variants={itemVariants}
+        >
+          Airdrop Guide
+        </motion.h2>
+        <motion.div 
+          className="space-y-4"
+          variants={itemVariants}
+        >
+          <motion.h3 
+            className="font-bold text-xl mb-2"
+            variants={itemVariants}
+          >
+            How to Get on-board
+          </motion.h3>
+          <motion.ol 
+            className="list-decimal pl-6 space-y-2"
+            variants={itemVariants}
+          >
+            <li>Register and download Satoshi app <a href="https://invite.satoshiapp.xyz/21g2c" className="text-blue-600 hover:underline">https://invite.satoshiapp.xyz/21g2c</a></li>
+            <li>Complete your verification and initiate your mining by participating in ongoing airdrops</li>
+            <li>Use gift card [once] to enjoy new user hash rate</li>
+            <li>Exchange hash cards with friends / other miners to increase your hash rate</li>
+            <li>Satoshi app uses rounds [airdrop tokens are distributed to participants every hour] 1 round = 1 hour</li>
+            <li>Mining will temporarily stop after twenty-five unclaimed rounds</li>
+          </motion.ol>
+        </motion.div>
+      </motion.div>
+      <motion.div 
+        className="max-w-screen-xl mx-auto mt-12 pt-8 border-t-2 border-gray-200"
+        variants={itemVariants}
+      ></motion.div>
+    </Container>
+  );
+};
+
+export default SatoshiAnalysis; 
