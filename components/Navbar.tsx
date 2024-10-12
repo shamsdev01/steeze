@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react";
+import React, { useState} from "react";
 import Link from "next/link";
 import { Disclosure } from "@headlessui/react";
 import { motion } from 'framer-motion';
@@ -54,10 +54,7 @@ export const Navbar = () => {
                 
         <Disclosure>
           {({ open }) => {
-            // Update our state when Disclosure state changes
-            React.useEffect(() => {
-              setIsOpen(open);
-            }, [open]);
+            setIsOpen(open); // Directly set the isOpen state when the Disclosure is open or closed
 
             return (
               <>
@@ -106,15 +103,11 @@ export const Navbar = () => {
                     </motion.div>
                   </motion.div>
                 </Disclosure.Panel>
-
-                {/* Debug info */}
-                {/* <div className="fixed bottom-0 left-0 bg-white p-2 text-black">
-                  Menu open: {isOpen ? 'Yes' : 'No'}
-                </div> */}
               </>
             );
           }}
         </Disclosure>
+
         <motion.div 
           className="hidden text-center lg:flex lg:items-center"
           variants={itemVariants}

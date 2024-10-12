@@ -45,7 +45,7 @@ const SatoshiAnalysis = () => {
             Satoshi App is a premier airdrop platform, serving over 16 million users worldwide and offering the opportunity to earn free tokens daily.
           </p>
           <p>
-            Satoshi app's mission is to enhance crypto enthusiasts' Web 3 experience by making it safer, smoother and more convenient.
+            Satoshi app&apos;s mission is to enhance crypto enthusiasts&apos; Web 3 experience by making it safer, smoother and more convenient.
           </p>
           <p>
             Satoshi app serves as a bridge, linking cutting-edge blockchain projects with a worldwide audience, providing users with a simple way to discover and receive tokens.
