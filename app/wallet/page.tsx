@@ -10,9 +10,10 @@ const page = () => {
   return (
     <div className="min-h-screen bg-cover bg-center" style={{ backgroundColor: '#001F3F' }}>
     <div className="container mx-auto px-4 py-8">
-      <header className="flex justify-between items-center mb-8">
-        <Image src={Steeze} alt="Logo" width={50} height={50} />
-        <h1 className="text-2xl font-bold text-white">Instant Gas Fees, Trade Urgency-Free</h1>
+    <Image src={Steeze} alt="Logo" width={50} height={50} />
+      <header className=" items-center mb-8 text-center">
+        <h1 className="text-2xl font-bold text-white text-center">Instant Gas Fees, Trade Urgency-Free</h1>
+        <span className=" font-bold text-white text-center">Deposit ahead, buy at current rates. Fast, Low-fee transactions. No volatility worrries</span>
       </header>
       
       <main className="space-y-8">

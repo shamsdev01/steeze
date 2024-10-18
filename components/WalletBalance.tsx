@@ -14,7 +14,7 @@ const WalletBalance = ({ balance }: WalletBalanceProps) => {
   };
 
   return (
-    <div className="bg-gray-800 rounded-lg p-4 text-white">
+    <div className=" rounded-lg p-4 text-white">
       <h2 className="text-xl mb-2">Wallet Balance</h2>
       <div className="flex items-center space-x-2">
         <p className="text-3xl font-bold">
