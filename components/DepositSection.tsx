@@ -36,18 +36,21 @@ const DepositSection = ({ walletBalance }: DepositSectionProps) => {
             />
             </div>
             
-            <input 
-              type="text" 
-              placeholder="Enter Amount" 
-              className="w-full max-w-[40%] p-3 bg-transparent border-b border-gray-600 text-white placeholder-gray-500 focus:outline-none focus:border-blue-400"
-            />
-            <div className="flex justify-between items-center text-gray-400 text-sm mb-4">
-              <span>Service Fee (0.5$)</span>
-              <div className="flex gap-2">
-                <button className="px-2 py-1 bg-white text-black rounded">USDT</button>
-                <button className="px-2 py-1 bg-white text-black rounded">TON</button>
-              </div>
-            </div>
+            <div className="w-full flex flex-col ">
+  <input
+    type="text"
+    required
+    className="w-full max-w-[40%] p-3 bg-transparent border-b border-gray-600 text-white placeholder-gray-500 focus:outline-none focus:border-blue-400"
+    placeholder="Enter Amount"
+  />
+  <div className="flex justify-between items-center text-gray-400 text-sm mb-4 w-full max-w-[500px]">
+    <span>Service Fee (0.5$)</span>
+    <div className="flex ml-20 gap-2 py-2">
+      <button className="px-2 py-1 bg-white text-black rounded">USDT</button>
+      <button className="px-2 py-1 bg-white text-black rounded">TON</button>
+    </div>
+  </div>
+</div>
             <div className=" flex gap-8 justify-end  mt-10 sm: flex-wrap">
               <span className="">Want to deposit in Naira?<br></br>
               Click here</span>

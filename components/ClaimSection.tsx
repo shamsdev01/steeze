@@ -44,7 +44,7 @@ const ClaimSection: React.FC = () => {
     placeholder="Enter Amount"
   />
   <div className="flex justify-between items-center text-gray-400 text-sm mb-4 w-full max-w-[500px]">
-    <span>Service Fee (0.5$)</span>
+    <span>Validator Fee (0.1$)</span>
     <div className="flex ml-20 gap-2 py-2">
       <button className="px-2 py-1 bg-white text-black rounded">USDT</button>
       <button className="px-2 py-1 bg-white text-black rounded">TON</button>
@@ -56,10 +56,10 @@ const ClaimSection: React.FC = () => {
       <div className="relative mb-4">
         <input
           type="text"
-          className="w-full p-3 bg-transparent border-b border-gray-600 text-white placeholder-gray-500 focus:outline-none focus:border-blue-400"
+          className="w-full max-w-[40%] p-3 bg-transparent border-b border-gray-600 text-white placeholder-gray-500 focus:outline-none focus:border-blue-400"
           placeholder="Wallet Address"
         />
-        <button className="absolute right-2 top-2 text-gray-400 hover:text-gray-200">✖</button>
+        <button className=" left-2 top-2 text-gray-400 hover:text-gray-200">✖</button>
       </div>
 
       {/* Action Buttons */}
