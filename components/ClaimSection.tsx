@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react';
-import { ChevronRight } from 'lucide-react';
+// import { ChevronRight } from 'lucide-react';
 
 const ClaimSection: React.FC = () => {
   const [selectedOption, setSelectedOption] = useState('');
