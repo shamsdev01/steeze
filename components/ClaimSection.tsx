@@ -1,5 +1,6 @@
 'use client'
 import React, { useState } from 'react';
+import WalletBalance from './WalletBalance';
 // import { ChevronRight } from 'lucide-react';
 
 const ClaimSection: React.FC = () => {
@@ -26,8 +27,9 @@ const ClaimSection: React.FC = () => {
     <div className="bg-[#001F3F] rounded-lg p-4 sm:p-6 text-white">
       <div className="flex flex-col sm:flex-row justify-between mb-6">
         <div className="mb-4 sm:mb-0">
-          <h3 className="font-bold text-xl sm:text-2xl">Wallet Balance</h3>
-          <span className="text-xl sm:text-2xl font-bold">$10,000</span>
+          {/* <h3 className="font-bold text-xl sm:text-2xl">Wallet Balance</h3>
+          <span className="text-xl sm:text-2xl font-bold">$10,000</span> */}
+          <WalletBalance/>
         </div>
         <div className="flex-1 flex justify-center">
           <div className="text-center">
@@ -56,11 +58,10 @@ const ClaimSection: React.FC = () => {
           onChange={handleOptionChange}
           className="w-full sm:max-w-[40%] p-3 bg-transparent border-b border-gray-600 text-white focus:outline-none focus:border-blue-400"
         >
-          <option value="" disabled>Select Option</option>
-          <option value="mass">Mass</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-          <option value="option4">Option 4</option>
+          <option className='text-black' value="" disabled>Choose Assets</option>
+          <option className='text-black' value="mass">TON</option>
+          <option className='text-black' value="option2">ETH</option>
+          <option className='text-black' value="option3">BNB</option>
         </select>
       </div>
 

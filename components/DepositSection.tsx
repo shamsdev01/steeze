@@ -3,12 +3,10 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { Copy } from 'lucide-react';
 import BarCode from '@/assets/images/barcode.png';
+import WalletBalance from './WalletBalance';
 
-interface DepositSectionProps {
-  walletBalance: number;
-}
 
-const DepositSection = ({ walletBalance }: DepositSectionProps) => {
+const DepositSection = () => {
   const [walletAddress] = useState('0x8d03AC93BCe2eA89DCD');
   const [showNotification, setShowNotification] = useState(false);
 
@@ -30,12 +28,13 @@ const DepositSection = ({ walletBalance }: DepositSectionProps) => {
         </div>
       )}
       <h2 className="text-2xl font-bold mb-4 text-center">Deposit</h2>
+      <WalletBalance/>
       <div className="lg:space-x-10">
         {/* Left side: Wallet Balance and QR Code */}
         <div className="flex flex-col items-center lg:items-start lg:flex-row justify-around lg:mb-0 gap-5 lg:mr-6">
           <div className="mb-4 lg:mb-0 text-center lg:text-left">
-            <h3 className="text-lg mb-2">Wallet Balance</h3>
-            <p className="text-3xl font-bold">${walletBalance.toLocaleString()}</p>
+            {/* <h3 className="text-lg mb-2">Wallet Balance</h3> */}
+         
           </div>
           <Image src={BarCode} alt="QR Code" width={300} height={300} className="w-full max-w-[200px] lg:max-w-[300px] object-contain" />
         </div>
@@ -45,12 +44,22 @@ const DepositSection = ({ walletBalance }: DepositSectionProps) => {
           <div className="flex flex-col items-center lg:items-start">
             <select className="w-full lg:max-w-[400px] p-3 bg-transparent border-b border-gray-600 text-white placeholder-gray-500 focus:outline-none focus:border-blue-400">
               <option value="">Select Token</option>
-              <option value="TON">TON</option>
-              <option value="ETH">ETH</option>
-              <option value="BNB">BNB</option>
-              <option value="USDT">USDT</option>
-              <option value="NAMBA">NAMBA</option>
-            </select>
+              <option className='text-black' value="TON">Eth (ERC 20)</option>
+              <option className='text-black' value="ETH">Eth (Arbitrum one) </option>
+              <option className='text-black' value="BNB">Eth -BSC ( BEP 20 ) </option>
+              <option className='text-black' value="USDT"> Eth  (zkSync lite )</option>
+              <option className='text-black' value="NAMBA"> Eth  (OP main-net)</option> 
+              <option className='text-black' value="NAMBA"> Eth  (Mantle Network)</option> 
+              <option className='text-black' value="NAMBA"> Eth  (Arbitrum Nova) </option> 
+              <option className='text-black' value="NAMBA">Eth  (zkSync Era ) </option> 
+              <option className='text-black' value="NAMBA">Eth  (Base main-net)  </option> 
+              <option className='text-black' value="NAMBA">Eth  (Linea) </option> 
+              <option className='text-black' value="NAMBA">Solana (SOL ) </option> 
+              <option className='text-black' value="NAMBA">BNB ➯ BSC ( BEP 20 )</option> 
+              <option className='text-black' value="NAMBA">Tron  (TRC 20)</option> 
+              <option className='text-black' value="NAMBA">Ton   (TON)</option> 
+              <option className='text-black' value="NAMBA">Matic ➯ </option> 
+              </select>
 
             <div className="relative w-full lg:max-w-[400px] mt-4">
               <input
