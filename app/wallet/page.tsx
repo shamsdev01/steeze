@@ -19,7 +19,7 @@ const page = () => {
       <main className="space-y-8">
         <WalletBalance balance={1000} />
         <AssetList />
-        <DepositSection walletBalance={10000} />
+        <DepositSection/>
         <ClaimSection />
       </main>
       
