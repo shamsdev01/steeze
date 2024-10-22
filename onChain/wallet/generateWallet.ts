@@ -12,7 +12,7 @@ type generateWalletReturnType = {
 /**
  * @name generateWallets
  * @description Generate wallets for all available chains
- * @dev this get called on create user Accoung
+ * @dev this get called on create user Account
  * @returns {Array} - Returns an array of wallet
  */
 
