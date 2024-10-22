@@ -6,6 +6,7 @@ type generateWalletReturnType = {
   chain: ChainTypes;
   address: string;
   encryptPrivateKey: string;
+  iv: string;
 };
 
 /**
@@ -19,11 +20,16 @@ export async function generateWallets(): Promise<generateWalletReturnType[]> {
   const wallets: generateWalletReturnType[] = [];
   for (const chain of availableChains) {
     const wallet = generateWallet(chain);
-    const encryptedPrivateKey = encryptPrivateKey(wallet.privateKey);
+    const { encryptedPrivateKey, iv } = encryptPrivateKey(wallet.privateKey);
     wallets.push({
       chain,
       address: wallet.address,
       encryptPrivateKey: encryptedPrivateKey,
+      /**
+       * @notice The IV dataType from the encryptPrivateKey function is  Buffer<ArrayBufferLike>
+       * @notice when decrypting the private key, the IV must be converted back to a Buffer
+       */
+      iv: iv.toString("hex"),
     });
   }
   return wallets;

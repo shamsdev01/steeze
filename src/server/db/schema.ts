@@ -141,6 +141,7 @@ export const wallets = createTable(
       .references(() => users.id), // Foreign key to the users table
     chain: varchar("chain", { length: 50 }).notNull(), // The blockchain chain (e.g., Ethereum, BSC)
     address: varchar("address", { length: 255 }).notNull(), // Public wallet address on that chain
+    iv: varchar("iv", { length: 255 }).notNull(), // Store the IV used in encryption (as a string)
     encryptedPrivateKey: text("encrypted_jwt").notNull(), // JWT containing the encrypted private key
     createdAt: timestamp("created_at", { withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
