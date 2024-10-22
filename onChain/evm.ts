@@ -11,4 +11,5 @@ export const bscProvider = new JsonRpcProvider(
 );
 
 // Polygon Provider
+//TODO set up env variable for all rpc
 export const polygonProvider = new JsonRpcProvider("https://polygon-rpc.com/");
