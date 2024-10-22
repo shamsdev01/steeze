@@ -17,9 +17,11 @@ type generateWalletReturnType = {
  */
 
 export async function generateWallets(): Promise<generateWalletReturnType[]> {
+  console.log("Generating wallets");
   const wallets: generateWalletReturnType[] = [];
   for (const chain of availableChains) {
     const wallet = generateWallet(chain);
+    console.log("Wallet generated for chain", chain, wallet);
     const { encryptedPrivateKey, iv } = encryptPrivateKey(wallet.privateKey);
     wallets.push({
       chain,
@@ -32,6 +34,7 @@ export async function generateWallets(): Promise<generateWalletReturnType[]> {
       iv: iv.toString("hex"),
     });
   }
+
   return wallets;
 }
 
@@ -56,6 +59,7 @@ function generateWallet(chain: ChainTypes): {
     // case "bitcoin":
     //   return generateBitcoinWallet();
     default:
-      throw new Error("Invalid chain");
+      return generateEvmWallet();
+    // throw new Error("Invalid chain");
   }
 }

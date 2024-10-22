@@ -17,7 +17,9 @@ import { type AdapterAccount } from "next-auth/adapters";
  *
  * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
  */
-export const createTable = pgTableCreator((name) => `steezglue${name}`);
+export const createTable = pgTableCreator(
+  (name) => `steezglue-production_${name}`,
+);
 
 export const users = createTable("user", {
   id: varchar("id", { length: 255 })
@@ -25,7 +27,7 @@ export const users = createTable("user", {
     .primaryKey()
     .$defaultFn(() => crypto.randomUUID()),
   name: varchar("name", { length: 255 }),
-  email: varchar("email", { length: 255 }).notNull(),
+  email: varchar("email", { length: 255 }).notNull().unique(),
   emailVerified: timestamp("email_verified", {
     mode: "date",
     withTimezone: true,

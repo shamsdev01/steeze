@@ -1,8 +1,7 @@
 "use server";
 
-import { type User } from "next-auth";
+import { signIn } from "next-auth/react";
 import { createUser, insertWallet } from "./CreateUserInsertWallet";
-import { type AdapterUser } from "next-auth/adapters";
 
 // Define the user interface for creating the user
 
@@ -43,7 +42,7 @@ export async function signUpWithCredentials(
     validateFormData({ email, password });
 
     // Create user and get the user ID
-    const userId = await createUser({ email } as User | AdapterUser, {});
+    const userId = await createUser({ email, password }, {});
 
     if (!userId) {
       throw new Error("Failed to create user.");
@@ -59,4 +58,13 @@ export async function signUpWithCredentials(
       throw new Error("Sign-up failed: An unknown error occurred.");
     }
   }
+}
+
+export async function signInWithCredentials(formData: FormData) {
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
+  await signIn("credentials", {
+    email: email,
+    password: password,
+  });
 }

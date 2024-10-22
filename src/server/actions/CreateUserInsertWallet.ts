@@ -4,6 +4,8 @@ import { db } from "../db";
 import { users, wallets } from "../db/schema";
 import { type Profile, type User } from "next-auth";
 import { generateWallets } from "onChain/wallet/generateWallet";
+import { hashUserPassword } from "@/lib/hash";
+import { eq } from "drizzle-orm";
 
 type CreateUserProps = User | AdapterUser;
 
@@ -26,14 +28,21 @@ export async function createUser(
   console.log("Creating a new user");
 
   let newUser;
+  const getUser = await db.query.users.findFirst({
+    where: eq(users.email, user.email!),
+  });
 
+  if (getUser) {
+    console.log("User already exists");
+    throw new Error("User already exists");
+  }
   if (isCreateUserProps2(user)) {
     // Handle CreateUserProps2 (with email and password)
     newUser = await db
       .insert(users)
       .values({
         email: user.email,
-        encryptedPassword: user.password,
+        encryptedPassword: hashUserPassword(user.password),
       })
       .returning({ insertedId: users.id });
   } else {

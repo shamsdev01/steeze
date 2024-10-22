@@ -119,7 +119,7 @@ export const authOptions: NextAuthOptions = {
 
         if (
           user &&
-          verifyPassword(credentials.password, user.encryptedPassword!)
+          verifyPassword(user.encryptedPassword!, credentials.password)
         ) {
           return user;
         }
