@@ -1,4 +1,4 @@
-"only server";
+"use server";
 
 import { type User } from "next-auth";
 import { createUser, insertWallet } from "./CreateUserInsertWallet";
@@ -32,9 +32,12 @@ function validateFormData({
  */
 
 export async function signUpWithCredentials(
-  email: string,
-  password: string,
+  state: void,
+  formData: FormData,
 ): Promise<void> {
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
+
   try {
     // Validate form data
     validateFormData({ email, password });

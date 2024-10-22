@@ -1,30 +1,15 @@
+"use client";
 import { signUpWithCredentials } from "@/server/actions/SignUpWithCardentials"; // Make sure this path is correct
 import { signIn } from "next-auth/react";
-import { useState } from "react";
-
+import { useFormState } from "react-dom";
 export default function SignUpPage() {
-  const [error, setError] = useState<string | null>(null);
-
-  const handleSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const formData = new FormData(event.currentTarget);
-
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
-
-    try {
-      await signUpWithCredentials(email, password);
-      // Optionally, you can redirect or show a success message here
-    } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError("An unknown error occurred.");
-      }
-    }
+  const initialState = {
+    message: null,
   };
-
+  const [state, formAction] = useFormState(
+    signUpWithCredentials,
+    initialState as unknown as void,
+  );
   return (
     <>
       <form>
@@ -37,7 +22,7 @@ export default function SignUpPage() {
       </form>
 
       {/* Form for sign up with credentials */}
-      <form onSubmit={handleSignUp}>
+      <form action={formAction}>
         <input name="email" type="email" placeholder="Email" required />
         <input
           name="password"
@@ -48,7 +33,7 @@ export default function SignUpPage() {
         <button type="submit">Sign Up</button>
       </form>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {/* {state. && <p style={{ color: "red" }}>{error}</p>} */}
     </>
   );
 }
