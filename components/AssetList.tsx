@@ -23,11 +23,11 @@ const AssetList = () => {
   // const cardsToShow = { mobile: 1, desktop: 3 };
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) =>
+    setCurrentIndex((prevIndex) =>   
       prevIndex + 1 >= assets.length ? 0 : prevIndex + 1
     );
   };
-
+  
   const prevSlide = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex - 1 < 0 ? assets.length - 1 : prevIndex - 1
