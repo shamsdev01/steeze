@@ -15,6 +15,7 @@ import {
   users,
   verificationTokens,
 } from "@/server/db/schema";
+import Google from "next-auth/providers/google";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -44,6 +45,11 @@ declare module "next-auth" {
  */
 export const authOptions: NextAuthOptions = {
   callbacks: {
+    //TODO: implement this
+    async signIn(params) {
+      //if user is not signed up, sign them up and create new account and wallet
+      // async createAccount
+    },
     session: ({ session, user }) => ({
       ...session,
       user: {
@@ -72,6 +78,10 @@ export const authOptions: NextAuthOptions = {
      *
      * @see https://next-auth.js.org/providers/github
      */
+    Google({
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
+    }),
   ],
 };
 

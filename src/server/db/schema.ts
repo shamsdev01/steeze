@@ -17,7 +17,9 @@ import { type AdapterAccount } from "next-auth/adapters";
  *
  * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
  */
-export const createTable = pgTableCreator((name) => `steezglue-production_${name}`);
+export const createTable = pgTableCreator(
+  (name) => `steezglue-production_${name}`,
+);
 
 export const posts = createTable(
   "post",
@@ -31,13 +33,13 @@ export const posts = createTable(
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
-      () => new Date()
+      () => new Date(),
     ),
   },
   (example) => ({
     createdByIdIdx: index("created_by_idx").on(example.createdById),
     nameIndex: index("name_idx").on(example.name),
-  })
+  }),
 );
 
 export const users = createTable("user", {
@@ -52,6 +54,7 @@ export const users = createTable("user", {
     withTimezone: true,
   }).default(sql`CURRENT_TIMESTAMP`),
   image: varchar("image", { length: 255 }),
+  enctyptedPassword: varchar("encrypted_password").notNull(),
 });
 
 export const usersRelations = relations(users, ({ many }) => ({
@@ -84,7 +87,7 @@ export const accounts = createTable(
       columns: [account.provider, account.providerAccountId],
     }),
     userIdIdx: index("account_user_id_idx").on(account.userId),
-  })
+  }),
 );
 
 export const accountsRelations = relations(accounts, ({ one }) => ({
@@ -107,7 +110,7 @@ export const sessions = createTable(
   },
   (session) => ({
     userIdIdx: index("session_user_id_idx").on(session.userId),
-  })
+  }),
 );
 
 export const sessionsRelations = relations(sessions, ({ one }) => ({
@@ -126,5 +129,33 @@ export const verificationTokens = createTable(
   },
   (vt) => ({
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
-  })
+  }),
 );
+
+export const wallets = createTable(
+  "wallet",
+  {
+    id: serial("id").primaryKey(), // Wallet primary key
+    userId: varchar("user_id", { length: 255 })
+      .notNull()
+      .references(() => users.id), // Foreign key to the users table
+    chain: varchar("chain", { length: 50 }).notNull(), // The blockchain chain (e.g., Ethereum, BSC)
+    address: varchar("address", { length: 255 }).notNull(), // Public wallet address on that chain
+    encryptedPrivateKey: text("encrypted_jwt").notNull(), // JWT containing the encrypted private key
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+  },
+  (wallet) => ({
+    userIdIdx: index("wallet_user_id_idx").on(wallet.userId), // Index on userId for fast lookups
+    chainAddressIdx: index("wallet_chain_address_idx").on(
+      wallet.chain,
+      wallet.address,
+    ), // Unique combination of chain and address
+  }),
+);
+
+// Relations for wallets
+export const walletsRelations = relations(wallets, ({ one }) => ({
+  user: one(users, { fields: [wallets.userId], references: [users.id] }), // Each wallet belongs to one user
+}));
