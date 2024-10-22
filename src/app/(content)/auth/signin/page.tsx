@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { signIn } from "next-auth/react";
-
+import { signIn, signout } from "next-auth/react";
+import { getServerAuthSession } from "@/server/auth";
+import { redirect } from "next/navigation";
 /**
  *
  * @todo - The metadata for the login page
@@ -13,7 +14,14 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function LoginPage() {
+export default async function LoginPage() {
+  const session = await getServerAuthSession();
+  
+  if (!session?.user.email) {
+    redirect("/auth/signup");
+  }
+  
+
   return (
     <form
       action={async () => {

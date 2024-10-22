@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 /**
  *
  * @todo - The metadata for the ForgetPasswordPage page
+ * todo implement forgePassword
  */
 export async function generateMetadata(): Promise<Metadata> {
   return {
