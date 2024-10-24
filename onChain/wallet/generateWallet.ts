@@ -1,13 +1,7 @@
 import { type ChainTypes, availableChains } from "onChain/AvaliableChain";
 import { encryptPrivateKey } from "../EncryptDecrypt";
 import { generateEvmWallet } from "./evmWallet";
-
-type generateWalletReturnType = {
-  chain: ChainTypes;
-  address: string;
-  encryptPrivateKey: string;
-  iv: string;
-};
+import { type generateWalletReturnType } from "./wallet";
 
 /**
  * @name generateWallets
@@ -59,7 +53,6 @@ function generateWallet(chain: ChainTypes): {
     // case "bitcoin":
     //   return generateBitcoinWallet();
     default:
-      return generateEvmWallet();
-    // throw new Error("Invalid chain");
+      throw new Error("Invalid chain");
   }
 }
