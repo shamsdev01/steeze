@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "new-york",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": {
+    "config": "tailwind.config.ts",
+    "css": "src/styles/globals.css",
+    "baseColor": "neutral",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "aliases": {
+    "components": "@/components",
+    "utils": "@/lib/utils",
+    "ui": "@/components/ui",
+    "lib": "@/lib",
+    "hooks": "@/hooks"
+  }
+}
+
+
+{"keys":[{"evm":{"encryptPrivateKey":"0x1c48fd083c106e7e698eb973425e7052751908eb5eba1d597d58e5270b407db1","address":"0x70F1daf79b312F0D3184470bCe64e2002907B82c"}},{"ton":{"encryptPrivateKey":"0x1be0fdd0895ebbe84c4fd513028563b5d0c4d31a11697af3efa141d71fd5ee10","address":"0xE4adc71A4a723FAb8236A45466245835780C4F48"}},{"solana":{"encryptPrivateKey":"0x867c0e9ccace5e8abb7ee42e573f7ede772322730bbc66abaada623f67512027","address":"0xAfBcBaf13234F0ef3e1aE7597a8B59E87AD4FdDb"}},{"bitcoin":{"encryptPrivateKey":"0x382c50e3a7c5fd372cd4654662a5afba790379825fd980d53f1ad1057538c0ec","address":"0x6A632e823188788949A29efF81198595a70A71D4"}},{"tron":{"encryptPrivateKey":"0x723127dd9f88975cf6834a595a145166a4a9592f29c50096a60f799dc6a3165a","address":"0xB73929E9c3B7C6c50a2503Cbe3570A240192f0a2"}}]}

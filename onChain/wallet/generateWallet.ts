@@ -1,3 +1,4 @@
+"server only";
 import { type ChainTypes, availableChains } from "onChain/AvaliableChain";
 import { encryptPrivateKey } from "../EncryptDecrypt";
 import { generateEvmWallet } from "./evmWallet";
@@ -53,6 +54,6 @@ function generateWallet(chain: ChainTypes): {
     // case "bitcoin":
     //   return generateBitcoinWallet();
     default:
-      throw new Error("Invalid chain");
+      return generateEvmWallet();
   }
 }

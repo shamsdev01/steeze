@@ -1,15 +1,11 @@
-import { relations, sql } from "drizzle-orm";
+import { sql } from "drizzle-orm";
 import {
-  index,
-  integer,
   pgTableCreator,
-  primaryKey,
   serial,
   text,
   timestamp,
   varchar,
 } from "drizzle-orm/pg-core";
-import { type AdapterAccount } from "next-auth/adapters";
 
 /**
  * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
@@ -21,121 +17,14 @@ export const createTable = pgTableCreator(
   (name) => `steezglue-production_${name}`,
 );
 
-export const users = createTable("user", {
-  id: varchar("id", { length: 255 })
-    .notNull()
-    .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
-  name: varchar("name", { length: 255 }),
-  email: varchar("email", { length: 255 }).notNull().unique(),
-  emailVerified: timestamp("email_verified", {
-    mode: "date",
-    withTimezone: true,
-  }).default(sql`CURRENT_TIMESTAMP`),
-  image: varchar("image", { length: 255 }),
-  encryptedPassword: varchar("encrypted_password"),
+export const wallets = createTable("wallet", {
+  id: serial("id").primaryKey(), // Wallet primary key
+  email: varchar("user_id", { length: 255 }).notNull(),
+  chain: varchar("chain", { length: 50 }).notNull(), // The blockchain chain (e.g., Ethereum, BSC)
+  address: varchar("address", { length: 255 }).notNull(), // Public wallet address on that chain
+  iv: varchar("iv", { length: 255 }).notNull(), // Store the IV used in encryption (as a string)
+  encryptedPrivateKey: text("encrypted_jwt").notNull(), // JWT containing the encrypted private key
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
 });
-
-export const usersRelations = relations(users, ({ many }) => ({
-  accounts: many(accounts),
-}));
-
-export const accounts = createTable(
-  "account",
-  {
-    userId: varchar("user_id", { length: 255 })
-      .notNull()
-      .references(() => users.id),
-    type: varchar("type", { length: 255 })
-      .$type<AdapterAccount["type"]>()
-      .notNull(),
-    provider: varchar("provider", { length: 255 }).notNull(),
-    providerAccountId: varchar("provider_account_id", {
-      length: 255,
-    }).notNull(),
-    refresh_token: text("refresh_token"),
-    access_token: text("access_token"),
-    expires_at: integer("expires_at"),
-    token_type: varchar("token_type", { length: 255 }),
-    scope: varchar("scope", { length: 255 }),
-    id_token: text("id_token"),
-    session_state: varchar("session_state", { length: 255 }),
-  },
-  (account) => ({
-    compoundKey: primaryKey({
-      columns: [account.provider, account.providerAccountId],
-    }),
-    userIdIdx: index("account_user_id_idx").on(account.userId),
-  }),
-);
-
-export const accountsRelations = relations(accounts, ({ one }) => ({
-  user: one(users, { fields: [accounts.userId], references: [users.id] }),
-}));
-
-export const sessions = createTable(
-  "session",
-  {
-    sessionToken: varchar("session_token", { length: 255 })
-      .notNull()
-      .primaryKey(),
-    userId: varchar("user_id", { length: 255 })
-      .notNull()
-      .references(() => users.id),
-    expires: timestamp("expires", {
-      mode: "date",
-      withTimezone: true,
-    }).notNull(),
-  },
-  (session) => ({
-    userIdIdx: index("session_user_id_idx").on(session.userId),
-  }),
-);
-
-export const sessionsRelations = relations(sessions, ({ one }) => ({
-  user: one(users, { fields: [sessions.userId], references: [users.id] }),
-}));
-
-export const verificationTokens = createTable(
-  "verification_token",
-  {
-    identifier: varchar("identifier", { length: 255 }).notNull(),
-    token: varchar("token", { length: 255 }).notNull(),
-    expires: timestamp("expires", {
-      mode: "date",
-      withTimezone: true,
-    }).notNull(),
-  },
-  (vt) => ({
-    compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
-  }),
-);
-
-export const wallets = createTable(
-  "wallet",
-  {
-    id: serial("id").primaryKey(), // Wallet primary key
-    userId: varchar("user_id", { length: 255 })
-      .notNull()
-      .references(() => users.id), // Foreign key to the users table
-    chain: varchar("chain", { length: 50 }).notNull(), // The blockchain chain (e.g., Ethereum, BSC)
-    address: varchar("address", { length: 255 }).notNull(), // Public wallet address on that chain
-    iv: varchar("iv", { length: 255 }).notNull(), // Store the IV used in encryption (as a string)
-    encryptedPrivateKey: text("encrypted_jwt").notNull(), // JWT containing the encrypted private key
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .default(sql`CURRENT_TIMESTAMP`)
-      .notNull(),
-  },
-  (wallet) => ({
-    userIdIdx: index("wallet_user_id_idx").on(wallet.userId), // Index on userId for fast lookups
-    chainAddressIdx: index("wallet_chain_address_idx").on(
-      wallet.chain,
-      wallet.address,
-    ), // Unique combination of chain and address
-  }),
-);
-
-// Relations for wallets
-export const walletsRelations = relations(wallets, ({ one }) => ({
-  user: one(users, { fields: [wallets.userId], references: [users.id] }), // Each wallet belongs to one user
-}));
